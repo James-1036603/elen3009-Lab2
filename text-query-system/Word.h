@@ -2,6 +2,7 @@
 #define WORD_H
 
 #include <string>
+#include <algorithm>
 using namespace std;
 
 // empty classes to represent different exceptions
@@ -32,7 +33,8 @@ public:
 	//Check if the word is querable by custom length
 	bool isQueryableByCustomLength(int Custom_Length) const;
 
-private:	
+private:
+
 	string _word;	
 };
 

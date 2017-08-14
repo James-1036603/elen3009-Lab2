@@ -3,9 +3,19 @@
 // -------------------------------------------
 
 #include "Word.h"
-
+#include<algorithm>	
 Word::Word(const string& word): _word{word}
-{
+{	//To Lower case
+	transform(_word.begin(), _word.end(), _word.begin(), ::tolower);
+
+	//Remove Punctuation
+	string result;
+	std::remove_copy_if(_word.begin(), _word.end(),
+        std:: back_inserter(result), //Store output           
+        std:: ptr_fun<int, int>(&std::ispunct)
+        );
+	_word=result;
+
 	// throws an exception (in the form of WordContainsNoLetters object)
 	// indicating that the word being constructed contains no letters
 	if (_word.empty()) throw WordContainsNoLetters();
@@ -61,3 +71,6 @@ bool Word::isQueryableByCustomLength(int Custom_Length) const{
 	if(_word.length()>= Custom_Length)return true;
 	else return false;
 }
+
+
+

@@ -2,8 +2,11 @@
 #define LINE_H
 
 #include "Word.h"
-#include <string>
+#include <string.h>
+#include <vector>
 using namespace std;
+class LineIsEmpty {};
+
 
 class Line
 {
@@ -16,7 +19,8 @@ public:
 	bool contains(const Word& search_word) const;
 
 private:		
-
+	vector<Word> _line;
+	
 };
 
 #endif
