@@ -183,21 +183,21 @@ TEST_CASE("Line numbers returned account for an empty Line") {
         testParagraph.contains(testWord,line_nums);
         CHECK(line_nums[0]==2);
 }
-//
-//// ----------------------------------------------------
-//
-//// Integration test - both Paragraph and File Reader are tested together
-//TEST_CASE("File can be read into Paragraph and successfully searched") {
-//	// make sure that alice.txt is in the right location for this to work!
-//	FileReader filereader("alice.txt");
-//	Paragraph paragraph;
-//	filereader.readFileInto(paragraph);
-//	Word search_word("Daddy");
-//	vector<int> line_numbers;
-//	CHECK(paragraph.contains(search_word, line_numbers));
-//	vector<int> expected_line_numbers;
-//	expected_line_numbers.push_back(1);
-//	expected_line_numbers.push_back(4);
-//	expected_line_numbers.push_back(6);
-//	CHECK(expected_line_numbers == line_numbers);
-//
+
+// ----------------------------------------------------
+
+// Integration test - both Paragraph and File Reader are tested together
+TEST_CASE("File can be read into Paragraph and successfully searched") {
+	// make sure that alice.txt is in the right location for this to work!
+	FileReader filereader("alice.txt");
+	Paragraph paragraph;
+	filereader.readFileInto(paragraph);
+	Word search_word("Daddy");
+	vector<int> line_numbers;
+	CHECK(paragraph.contains(search_word, line_numbers));
+	vector<int> expected_line_numbers;
+	expected_line_numbers.push_back(1);
+	expected_line_numbers.push_back(4);
+	expected_line_numbers.push_back(6);
+	CHECK(expected_line_numbers == line_numbers);
+}

@@ -19,4 +19,5 @@ void FileReader::readFileInto(Paragraph& file_receiver)
 		Line word_line(text_line);
 		file_receiver.addLine(word_line);
 	}
+	infile.close();
 }
