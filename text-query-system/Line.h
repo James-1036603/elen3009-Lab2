@@ -18,6 +18,7 @@ public:
 	// returns true if the search word is found in the line; false otherwise
 	bool contains(const Word& search_word) const;
 
+
 private:		
 	vector<Word> _line;
 	

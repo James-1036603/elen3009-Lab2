@@ -23,19 +23,21 @@ public:
 	// returns true if queryable, false otherwise
 	// (according to the brief, words less than 3 characters are not queryable)
 	bool isQueryable() const;
-	
-	//Check if the word contains only letters
-	bool ContainsLetters() const;
-
-	//Check if the word contains any spaces
-	bool HasSpaces() const;
-	
 	//Check if the word is querable by custom length
-	bool isQueryableByCustomLength(int Custom_Length) const;
+        bool isQueryableByCustomLength(int Custom_Length) const;
 
+	
+	
 private:
 
 	string _word;	
+	
+	//Check if the word contains only letters
+        bool ContainsLetters() const;
+
+        //Check if the word contains any spaces
+        bool HasSpaces() const;
+
 };
 
 #endif

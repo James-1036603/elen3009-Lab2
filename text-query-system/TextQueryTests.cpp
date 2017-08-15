@@ -2,6 +2,7 @@
 #include "Line.h"
 #include "Paragraph.h"
 #include "FileReader.h"
+#include <vector>
 
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include "doctest.h"
@@ -125,24 +126,63 @@ TEST_CASE("Word which is not queryable cannot be found") {
    CHECK_FALSE(testline.contains(too_small_to_query));
 }
 
-//// ----------------------------------------------------
-//
-//TEST_CASE("Word cannot be found in empty Paragraph") {
-//}
-//
-//TEST_CASE("Word not present in Paragraph cannot be found") {
-//}
-//
-//TEST_CASE("Line number of a Word appearing once in Paragraph is returned") {
-//}
-//
-//TEST_CASE("Line numbers of a Word appearing in multiple Lines of a Paragraph is returned") {
-//}
-//
-//TEST_CASE("Line numbers returned account for an empty Line") {
-//// If the first line of the paragraph is empty, and the word being searched for
-//// is on the second line, the vector returned should be: [2]
-//}
+// ----------------------------------------------------
+
+TEST_CASE("Word cannot be found in empty Paragraph") {
+	Word testWord("Word");
+	vector<int> line_nums;
+	Paragraph testParagraph;
+	CHECK_FALSE(testParagraph.contains(testWord, line_nums));
+}
+
+TEST_CASE("Word not present in Paragraph cannot be found") {
+	Word testWord("Cookie");
+        vector<int> line_nums;
+	Line testLine("The word you are looking for will not be found in this line.");
+        Paragraph testParagraph;
+	testParagraph.addLine(testLine);
+        CHECK_FALSE(testParagraph.contains(testWord, line_nums));
+}
+
+TEST_CASE("Line number of a Word appearing once in Paragraph is returned") {
+	Word testWord("Cookie");
+        vector<int> line_nums;
+        Line testLine("Cookie is the first word in this first line.");
+        Paragraph testParagraph;
+        testParagraph.addLine(testLine);
+	testParagraph.contains(testWord, line_nums);
+        CHECK(line_nums[0]==1);
+}
+
+TEST_CASE("Line numbers of a Word appearing in multiple Lines of a Paragraph is returned") {
+	 Word testWord("Cookie");
+        vector<int> line_nums;
+	Paragraph testParagraph;
+        Line testLine("Cookie is the first word in this first line.");
+	testParagraph.addLine(testLine);
+	Line testLine2("The word is left out here.");
+	testParagraph.addLine(testLine2);
+	Line testLine3("Cookie is the first word on this second line.");
+	testParagraph.addLine(testLine3);
+	testParagraph.contains(testWord,line_nums);	
+	
+        CHECK(line_nums[0]==1);
+	CHECK(line_nums[1]==3);
+}
+
+TEST_CASE("Line numbers returned account for an empty Line") {
+// If the first line of the paragraph is empty, and the word being searched for
+// is on the second line, the vector returned should be: [2]
+	 Word testWord("Cookie");
+        vector<int> line_nums;
+        Paragraph testParagraph;
+        Line testLine("");
+        testParagraph.addLine(testLine);
+        Line testLine2("Cookie is the first word on this second line.");
+        testParagraph.addLine(testLine2);
+        testParagraph.contains(testWord,line_nums);
+        CHECK(line_nums[0]==2);
+}
 //
 //// ----------------------------------------------------
 //
